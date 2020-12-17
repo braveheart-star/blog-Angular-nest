@@ -17,7 +17,5 @@ export abstract class BaseEntity extends OrmBaseEntity {
     @UpdateDateColumn({ type: 'timestamptz' })
     public updatedAt: Date;
 
-    @VersionColumn()
-    public version: number;
 }
 

@@ -12,9 +12,8 @@ import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { CreateUserDto } from './dto/createUser.dto';
 
-
 import * as dotenv from 'dotenv';
-import { AuthDto } from '../auth/dto/auth.dto';
+import UpdateUserDto from './dto/updateUser.dto';
 
 dotenv.config();
 
@@ -55,5 +54,11 @@ export class UserService {
   }
 
 
-
+  // async updateUser(user: UserEntity, dto: UpdateUserDto) {
+  //   user = Object.assign(user, dto);
+  //   await user.save();
+  //   return user;
 }
+
+
+

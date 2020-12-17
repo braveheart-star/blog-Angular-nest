@@ -7,6 +7,7 @@ import {
   Post,
   UseGuards,
   Delete,
+  UseInterceptors,
   Param,
   HttpStatus,
 } from '@nestjs/common';
@@ -23,12 +24,6 @@ export class AuthController {
 
   constructor(private readonly authService: AuthService) { }
 
-  @HttpCode(200)
-  @UseGuards(AuthGuard('local'))
-  @Post('login/local')
-  async logIn(@GetUser() user): Promise<any> {
-    return this.authService.getWithJwtToken(user);
-  }
 
   @Post('register/local')
   async registerWithLocal(
@@ -36,6 +31,17 @@ export class AuthController {
   ): Promise<UserEntity> {
     return this.authService.registerWithLocal(createUserDto);
   }
+
+
+  @HttpCode(200)
+  @UseGuards(AuthGuard('local'))
+  @Post('login/local')
+  async logIn(@GetUser() user): Promise<any> {
+    return this.authService.getWithJwtToken(user);
+  }
+
+
+
 
 
 }
