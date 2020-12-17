@@ -14,6 +14,7 @@ import { CreateUserDto } from './dto/createUser.dto';
 
 
 import * as dotenv from 'dotenv';
+import { AuthDto } from '../auth/dto/auth.dto';
 
 dotenv.config();
 
@@ -24,6 +25,14 @@ export class UserService {
     @InjectRepository(UserEntity)
     private usersRepository: Repository<UserEntity>,
   ) { }
+
+
+  async create(createUserData: CreateUserDto) {
+    const createUser = this.usersRepository.create(createUserData);
+    const createdUser = await createUser.save();
+    return createdUser;
+  }
+
 
   async getByEmail(email: string) {
     const user = await this.usersRepository.findOne({ email });
@@ -44,5 +53,7 @@ export class UserService {
     }
     return user;
   }
+
+
 
 }

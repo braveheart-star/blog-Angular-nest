@@ -7,6 +7,7 @@ import { BaseEntity } from 'typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity]), BaseEntity,],
   controllers: [UserController],
+  exports: [UserService],
   providers: [UserService]
 })
 export class UserModule { }
