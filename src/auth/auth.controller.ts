@@ -17,31 +17,22 @@ import { GetUser } from '../utils/decorators/getUser.decorator';
 import { CreateUserDto } from '../user/dto/createUser.dto';
 import { UserEntity } from '../user/user.entity';
 
-
-
 @Controller('auth')
 export class AuthController {
+  constructor(private readonly authService: AuthService) {}
 
-  constructor(private readonly authService: AuthService) { }
-
-
-  @Post('register/local')
+  @Post('register')
   async registerWithLocal(
     @Body() createUserDto: CreateUserDto,
   ): Promise<UserEntity> {
+    console.log('from front credentional', createUserDto);
     return this.authService.registerWithLocal(createUserDto);
   }
 
-
   @HttpCode(200)
   @UseGuards(AuthGuard('local'))
-  @Post('login/local')
+  @Post('login')
   async logIn(@GetUser() user): Promise<any> {
     return this.authService.getWithJwtToken(user);
   }
-
-
-
-
-
 }

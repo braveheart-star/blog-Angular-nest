@@ -51,11 +51,14 @@ export class BlogController {
 
   @Put()
   async updateBlog(@Body() updateBlogDto: UpdateBlogDto): Promise<any> {
+    console.log('updateBlogDto', updateBlogDto);
     return this.blogService.updateBlog(updateBlogDto);
   }
 
   @Delete(':id')
   async deleteBlog(@Param('id', ParseIntPipe) id): Promise<any> {
+    console.log('here delete', id);
+
     return this.blogService.deleteBlog(id);
   }
 }

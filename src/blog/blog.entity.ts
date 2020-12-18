@@ -1,9 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { UserEntity } from '../user/user.entity';
 import { BaseEntity } from '../utils/base.entity';
 
@@ -17,9 +12,6 @@ export class BlogEntity extends BaseEntity {
 
   @Column()
   description: string;
-
-  @Column({ nullable: true })
-  headerImage: string;
 
   @ManyToOne((type) => UserEntity, (user) => user.blogEntries)
   author: UserEntity;

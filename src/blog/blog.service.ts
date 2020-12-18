@@ -20,7 +20,7 @@ export class BlogService {
   ) {}
 
   async getAll() {
-    const blogs = await this.blogRepository.find();
+    const blogs = await this.blogRepository.find({ relations: ['author'] });
     return blogs;
   }
 
@@ -52,14 +52,14 @@ export class BlogService {
     const { id, title, description } = updateBlogDto;
     const updateBlog = await this.blogRepository.findOne(id);
     if (!updateBlog) {
-      throw new NotFoundException(`Comment Not Found With Id: ${id}`);
+      throw new NotFoundException(`blog Not Found With Id: ${id}`);
     }
     try {
-      const updatedResponse = await this.blogRepository.update(id, {
+      await this.blogRepository.update(id, {
         title,
         description,
       });
-      return updatedResponse.affected;
+      return this.getAll();
     } catch (error) {
       throw new InternalServerErrorException(error.message);
     }

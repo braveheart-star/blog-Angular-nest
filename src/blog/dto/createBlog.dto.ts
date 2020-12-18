@@ -9,7 +9,7 @@ export class CreateBlogDto {
   @IsString()
   description: string;
 
-  @IsNotEmpty()
-  @IsString()
-  headerImage: string;
+  // @IsNotEmpty()
+  // @IsString()
+  // headerImage: string;
 }
